@@ -39,7 +39,10 @@ const server = http.createServer((req, res) => {
                         res.end('<html><body><h2>Error 404. Page Not Found. ' + fileURL + '</h2></body></html>');
                     }else{
                         res.statusCode = 200;
-                        res.setHeader('Content-Type', 'text/html');                        
+                        res.setHeader('Content-Type', 'text/html');      
+                        // By createReadStream filePath data read and convert into stream of bites. through bites one by 
+                        // one pipes response. pipes help to response multiple line
+                        //we can do also readFile but createReadStream can handle big single lines of codes and by pips response
                         fs.createReadStream(filePath).pipe(res);
                     }
                 })
